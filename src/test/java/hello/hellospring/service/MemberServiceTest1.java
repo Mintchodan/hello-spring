@@ -12,7 +12,9 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MemberServiceTest {
+class MemberServiceTest1 {
+
+    // MemberService에서 컨트롤 + 쉬프트 + T 눌러서 만든 클래스
 
     MemberService memberService;
     MemoryMemberRepsitory memberRepsitory;
@@ -20,7 +22,7 @@ class MemberServiceTest {
     @BeforeEach
     public void beforeEach() {
         memberRepsitory = new MemoryMemberRepsitory();
-        //memberService = new MemberService(memberRepsitory);
+        memberService = new MemberService(memberRepsitory);
     }
 
     @AfterEach
