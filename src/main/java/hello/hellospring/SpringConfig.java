@@ -14,12 +14,7 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private EntityManager em;
 
-    @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
-    }
 
     //    private DataSource dataSource;
 //
@@ -28,19 +23,33 @@ public class SpringConfig {
 //        this.dataSource = dataSource;
 //    }
 
+//    private EntityManager em;
+//
+//    @Autowired
+//    public SpringConfig(EntityManager em) {
+//        this.em = em;
+//    }
+
+    private final MemberRepository memberRepository;
+
+    @Autowired
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
+        return new MemberService(memberRepository);
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
-        // return new MemoryMemberRepsitory();
-
-        // 다른 어떤 코드도 손대지 않고 MemoryMemberRepsitory -> JdbcMemberRepository로 수정함으로써 DB연결
-        // 스프링을 사용하는 이유
-        // return new JdbcMemberRepository(dataSource);
-        //return new JdbcTemplateMemberRepository(dataSource);
-        return new JpaMemberRepository(em);
-    }
+//    @Bean
+//    public MemberRepository memberRepository() {
+//        // return new MemoryMemberRepsitory();
+//
+//        // 다른 어떤 코드도 손대지 않고 MemoryMemberRepsitory -> JdbcMemberRepository로 수정함으로써 DB연결
+//        // 스프링을 사용하는 이유
+//        // return new JdbcMemberRepository(dataSource);
+//        //return new JdbcTemplateMemberRepository(dataSource);
+//        return new JpaMemberRepository(em);
+//    }
 }
